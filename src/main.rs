@@ -111,14 +111,13 @@ fn main() {
     // {"strategy":"Simple","degree":17,"num_advice":6,"num_lookup_advice":1,"num_fixed":1,"lookup_bits":8,"limb_bits":90,"num_limbs":3}
     let params = KZGCircuitParams::new(FpStrategy::Simple, K, 6, 1, 1, 16, 90, 3);
 
-    let circuit = kzg_circuit::<N_ASSETS>(
-        params,
-        CircuitBuilderStage::Mock,
-        None,
-        "./src/two_assets_entry_2_15.csv",
-        // "./src/entry_16.csv",
-        0,
-    );
+    let file_path = if cfg!(feature = "large-entry") {
+        "./src/two_assets_entry_2_15.csv"
+    } else {
+        "./src/entry_16.csv"
+    };
+
+    let circuit = kzg_circuit::<N_ASSETS>(params, CircuitBuilderStage::Mock, None, file_path, 0);
 
     // Mocking test
     // MockProver::run(params.degree, &circuit, vec![])

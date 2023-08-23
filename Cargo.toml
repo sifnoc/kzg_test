@@ -17,8 +17,5 @@ ff = "0.12"
 serde = "1.0.183"
 num_cpus = "1.16.0"
 
-[dev-dependencies]
-# pprof = { version = "0.11", features = ["criterion", "flamegraph"] }
-# criterion = "0.4"
-# criterion-macro = "0.4"
-# halo2-base = { git = "https://github.com/punwai/halo2-lib", branch = "kzg", default-features = false, features = ["test-utils"] }
+[features]
+large-entry = []
