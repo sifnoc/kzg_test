@@ -2154,6 +2154,7 @@ dependencies = [
  "ff 0.12.1",
  "halo2-base",
  "halo2-ecc",
+ "num_cpus",
  "rand",
  "rand_chacha",
  "rand_core",

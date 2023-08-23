@@ -1,15 +1,6 @@
 /*
  * Test suite for KZGChip.
  */
-use halo2_base::halo2_proofs::halo2curves::bn256::Bn256;
-use halo2_base::halo2_proofs::plonk::{create_proof, keygen_pk, keygen_vk, verify_proof};
-use halo2_base::halo2_proofs::poly::commitment::ParamsProver;
-use halo2_base::halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
-use halo2_base::halo2_proofs::poly::kzg::multiopen::{ProverGWC, VerifierGWC};
-use halo2_base::halo2_proofs::poly::kzg::strategy::SingleStrategy;
-use halo2_base::halo2_proofs::transcript::{
-    Blake2bRead, Blake2bWrite, Challenge255, TranscriptReadBuffer, TranscriptWriterBuffer,
-};
 use halo2_ecc::{
     bn254::{pairing::PairingChip, Fp2Chip, FpChip},
     commitments::{kzg::KZGChip, FrChip},

@@ -46,10 +46,16 @@ where
     let pp = UserData::<N_ASSETS>::mock_trusted_setup(tau, (1 << kzg_k) + 1, (to * 3) + 2);
 
     // Load user data from the entry
+    let load_userdata_time = start_timer!(|| "loading user data");
     let user_data = UserData::new(entries, pp.clone(), kzg_k);
+    end_timer!(load_userdata_time);
 
+    let eval_commit_time = start_timer!(|| "evaluating commitment");
     let p_bar = user_data.commit_vector();
+    end_timer!(eval_commit_time);
+    let eval_q_time = start_timer!(|| "evaluating q");
     let q_bar = user_data.open_prf(from, to);
+    end_timer!(eval_q_time);
 
     let selected_root = root_of_unity(kzg_k as u32);
 
@@ -82,7 +88,7 @@ where
 
     let circuit = match stage {
         CircuitBuilderStage::Mock => {
-            builder.config(k, Some(20));
+            builder.config(k, Some(0));
             RangeCircuitBuilder::mock(builder)
         }
         CircuitBuilderStage::Keygen => {
@@ -98,15 +104,17 @@ where
 fn main() {
     // This code comes from `random_kzg_multi_circuit` method in https://github.com/punwai/halo2-lib/tree/kzg
     const N_ASSETS: usize = 2;
+    const K: u32 = 17;
 
     // {"strategy":"Simple","degree":17,"num_advice":6,"num_lookup_advice":1,"num_fixed":1,"lookup_bits":8,"limb_bits":90,"num_limbs":3}
-    let params = KZGCircuitParams::new(FpStrategy::Simple, 19, 6, 1, 1, 18, 90, 3);
+    let params = KZGCircuitParams::new(FpStrategy::Simple, K, 6, 1, 1, 16, 90, 3);
 
     let circuit = kzg_circuit::<N_ASSETS>(
         params,
         CircuitBuilderStage::Mock,
         None,
-        "./src/entry_16.csv",
+        "./src/two_assets_entry_2_15.csv",
+        // "./src/entry_16.csv",
         0,
     );
 
@@ -115,7 +123,7 @@ fn main() {
     //     .unwrap()
     //     .assert_satisfied();
 
-    let params = gen_srs(19);
+    let params = gen_srs(K);
 
     let vk_time = start_timer!(|| "Generating vkey");
     let vk = keygen_vk(&params, &circuit).unwrap();
