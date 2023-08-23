@@ -160,6 +160,7 @@ where
         let z: Polynomial<Fr> = Polynomial::vanishing(&idxs_fr);
 
         let (q, rem) = Polynomial::div_euclid(&(self.p.clone() - r.clone()), &z);
+        println!("evaluated q and rem");
         if !rem.is_zero() {
             panic!("p(X) - r(X) is not divisible by z(X). Cannot compute q(X)");
         }

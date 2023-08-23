@@ -40,8 +40,10 @@ where
     let tau: Fr = Fr::from(111);
     let kzg_k: u32 = entries_len.ilog2() + 3;
 
+    // the first element of vector is zero, so we need to add 1
+    // the vector looks like this: [0, h(username, balance_0, balance_1), username, balance_0, balance_1, ...]
     let from = user_index * N_ASSETS + 1;
-    let to = from + N_ASSETS + 1;
+    let to = from + N_ASSETS + 2;
 
     let pp = UserData::<N_ASSETS>::mock_trusted_setup(tau, (1 << kzg_k) + 1, (to * 3) + 2);
 
