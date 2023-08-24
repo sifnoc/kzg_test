@@ -1,8 +1,7 @@
 #![feature(generic_const_exprs)]
 #![feature(int_log)]
-mod user_data;
 use kzg_mst::circuits::kzg::KZGCircuitParams;
-use user_data::UserData;
+use kzg_mst::user_data::UserData;
 
 use ark_std::{end_timer, start_timer};
 use halo2_base::halo2_proofs::halo2curves::bn256::{Bn256, Fr};

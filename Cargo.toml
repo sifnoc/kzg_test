@@ -19,3 +19,6 @@ num_cpus = "1.16.0"
 
 [features]
 large-entry = []
+
+[[example ]]
+name="kzg-circuit"

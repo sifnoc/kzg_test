@@ -148,12 +148,6 @@ where
             .map(|idx| selected_root.pow(&[*idx as u64, 0, 0, 0]))
             .collect();
 
-        // let mut data: Vec<Fr> = vec![];
-        // // TODO: refactor this logic
-        // let node = self.entry[idx as usize].compute_leaf();
-        // data.push(Fr::from_bytes_le(&node.hash.to_bytes()));
-        // node.balances.iter().for_each(|b| data.push(Fr::from_bytes_le(&b.to_bytes())));
-
         let vals: Vec<Fr> = idxs.iter().map(|idx| self.data[*idx as usize]).collect();
 
         let r: Polynomial<Fr> = Polynomial::from_points_lagrange(&idxs_fr, &vals);
