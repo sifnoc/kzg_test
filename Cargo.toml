@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 halo2-ecc = { git = "https://github.com/punwai/halo2-lib", branch = "kzg"}
 halo2-base = { git = "https://github.com/punwai/halo2-lib", branch = "kzg", default-features = false, features = ["test-utils"] }
+halo2_proofs = { git = "https://github.com/privacy-scaling-explorations/halo2", tag = "v2023_04_20"}
 summa-solvency =  { git = "https://github.com/summa-dev/summa-solvency.git", package = "summa-solvency", rev = "56f28ee0" }
 ark-std = { version = "0.3.0", features = ["print-trace"] }
 rand_core = { version = "0.6", default-features = false, features = ["getrandom"] }
