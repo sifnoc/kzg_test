@@ -19,18 +19,18 @@ Note: We adjusted the value for the K factor upwards when evaluating polynomial 
 
 | Entries(2^k)  |   MST commit time(s) |   Polynomial Commit time(s) |   Performance Ratio (MST/Poly) |
 |---:|------------------:|-------------------------:|----------:|
-| 10 |          0.704    |                 0.261    |  x2.692   |
-| 11 |          1.382    |                 0.511    |  x2.703   |
-| 12 |          2.752    |                 1.011    |  x2.722   |
-| 13 |          5.556    |                 2.044    |  x2.718   |
-| 14 |         11.074    |                 3.963    |  x2.794   |
-| 15 |         22.015    |                 7.923    |  x2.778   |
-| 16 |         44.049    |                15.692    |  x2.807   |
-| 17 |         88.211    |                31.043    |  x2.841   |
-| 18 |        176.363    |                61.961    |  x2.846   |
-| 19 |        352.468    |               123.681    |  x2.849   |
-| 20 |        704.646    |               245.971    |  x2.864   |
-| 21 |       1408.12     |               490.199    |  x2.872   |
+| 10 |             0.056 |                    0.020 | x2.740 |
+| 11 |             0.112 |                    0.040 | x2.815 |
+| 12 |             0.212 |                    0.079 | x2.692 |
+| 13 |             0.422 |                    0.153 | x2.763 |
+| 14 |             0.886 |                    0.302 | x2.937 |
+| 15 |             1.681 |                    0.600 | x2.800 |
+| 16 |             3.421 |                    1.230 | x2.781 |
+| 17 |             6.803 |                    2.391 | x2.845 |
+| 18 |            13.476 |                    4.748 | x2.838 |
+| 19 |            26.773 |                    9.482 | x2.824 |
+| 20 |            53.631 |                   18.735 | x2.863 |
+| 21 |           106.782 |                   37.491 | x2.848 |
 
 Run on AMD 5950X, 64GB RAM, 16 cores.
 
@@ -52,7 +52,7 @@ tar -xjf csv_files.tar.bz2
 You can also run on your local machine:
 
 ```bash
-> cargo run --bin comparing-mst-kzg
+> cargo run -r --bin comparing-mst-kzg
 ```
 
 ## Testing KZG commitment on KZGCircuit
@@ -69,11 +69,11 @@ However, the circuit demands a substantial number of rows to generate a proof.
 
 | Task                   | Duration        |
 |------------------------|----------------:|
-| Loading user data      |  44.950ms       |
-| Evaluating commitment  | 439.141ms       |
-| Generating vkey        |  141.388s       |
-| Generating pkey        |   61.444s       |
-| Proving time           |  241.209s       |
+| Loading user data      |   4.526ms       |
+| Evaluating commitment  |  16.418ms       |
+| Generating vkey        |   8.319s        |
+| Generating pkey        |   6.704s        |
+| Proving time           |  16.157s        |
 
 Additional Information:
 - Gate Chip | Phase 0: 7474506 advice cells, 990516 lookup advice cells
@@ -86,11 +86,11 @@ Additional Information:
 By default, the code will use the `./src/csv/entry_16.csv` file. You can compile and run the project using the standard commands:
 
 ```bash
-> cargo run --bin kzg-circuit
+> cargo run -r --bin kzg-circuit
 ```
 
 If you want to test with a larger set $2^{15}$, the `./src/csv/two_assets/two_assets_entry_2_15.csv` file instead, you can enable the large feature when building or running the project:
 
 ```bash
-> cargo run --bin kzg-circuit --features large-entry
+> cargo run -r --bin kzg-circuit --features large-entry
 ```
