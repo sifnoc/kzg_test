@@ -21,5 +21,10 @@ num_cpus = "1.16.0"
 [features]
 large-entry = []
 
-[[example ]]
+[[bin]]
 name="kzg-circuit"
+path="src/kzg_circuit.rs"
+
+[[bin]]
+name = "comparing-mst-kzg"
+path = "src/mst_vs_kzg_commitment_comparison.rs"
