@@ -12,6 +12,11 @@ The results of our tests are as follows:
 
 <img src="kzg_mst_result.png" alt="kzg_vs_mst_time" width="400"/>
 
+Note: We adjusted the value for the K factor upwards when evaluating polynomial commitments in comparison to MST. This is because in MST, actions such as evaluating commits, obtaining the root hash, or increasing the number of assets don't significantly impact performance. 
+ However, in polynomial commitments, the degree of the polynomial increases directly in proportion to the added number of assets.
+
+ For this test case, since we worked with two assets, the polynomial commitment was adjusted to $K + 2$.
+
 | Entries(2^k)  |   MST commit time(s) |   Polynomial Commit time(s) |   Performance Ratio (MST/Poly) |
 |---:|------------------:|-------------------------:|----------:|
 | 10 |          0.704    |                 0.261    |  x2.692   |
